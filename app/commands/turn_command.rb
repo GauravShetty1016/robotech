@@ -4,7 +4,7 @@ module Robotech
   module Commands
     class TurnCommand < Command
       def perform
-        return false if !["left", "right"].include?(@action) || @position.nil?
+        return false if !valid_action.include?(@action) || @position.nil?
 
         case @action
         when "left"
@@ -14,6 +14,11 @@ module Robotech
         end
 
         return @position
+      end
+
+      def valid_action
+        return ["left", "right"] if @valid_action.nil? || !@valid_action.kind_of?(Array)
+        @valid_action
       end
     end
   end

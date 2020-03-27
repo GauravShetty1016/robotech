@@ -4,12 +4,16 @@ module Robotech
   module Commands
     class MoveCommand < Command
       def perform
-        return false if @action != "move" || @position.nil?
+        return false if @action != valid_action || @position.nil?
 
         next_position = position_on_move
         return false unless @ruleset.valid_position?(next_position)
         @position = next_position
         @position
+      end
+
+      def valid_action
+        @valid_action || "move"
       end
 
       private

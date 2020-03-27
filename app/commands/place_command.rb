@@ -11,15 +11,19 @@ module Robotech
         @position
       end
 
+      def valid_action
+        @valid_action || "place"
+      end
+
       private
 
       def is_valid_command?
-        return false if @action != "place" || @params.nil? || @params.length == 0
+        return false if @action != valid_action || @params.nil? || @params.length == 0
 
         x, y, facing = @params
 
         valid_coordinates = true if Float(x) && Float(y) rescue false
-        return false if !valid_coordinates || !["north", "south", "east", "west"].include?(facing)
+        return false if !valid_coordinates || !@orientations.include?(facing)
         true
       end
     end
