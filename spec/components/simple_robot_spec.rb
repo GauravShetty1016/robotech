@@ -19,7 +19,6 @@ RSpec.describe Robotech::Component::SimpleRobot do
   end
 
   it "Should place the robot if the place command has been sent" do
-    # expect(subject).to receive(:place_robot).with(["0", "0", "north"]).and_call_original
     subject.action(["place", ["0", "0", "north"]])
     expect { subject.action(["report"]) }.to output("0,0,NORTH\n").to_stdout
   end
@@ -89,7 +88,7 @@ RSpec.describe Robotech::Component::SimpleRobot do
 
     it "Should not perform action when ruleset is false" do
       subject.action(["place", ["0", "0", "north"]])
-      expect(subject.action(["report"])).to be_nil
+      expect(subject.action(["report"])).to be false
     end
   end
 end
