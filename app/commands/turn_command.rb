@@ -4,7 +4,7 @@ module Robotech
   module Commands
     class TurnCommand < Command
       def perform
-        return false unless ["left", "right"].include?(@action)
+        return false if !["left", "right"].include?(@action) || @position.nil?
 
         case @action
         when "left"

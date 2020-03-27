@@ -3,7 +3,7 @@ module Robotech
     class Command
       attr_reader :position
 
-      def initialize(command:, position:, orientations:, ruleset:, options: {})
+      def initialize(command:, position:, ruleset:, orientations: [], options: {})
         raise ArgumentError, "Command cannot be empty" if command.nil?
         @action, @params = command
         @position = position

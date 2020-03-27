@@ -28,7 +28,7 @@ module Robotech
 
       def run_command(command)
         command = @command_parser.parse(command)
-        return puts "Invalid Command" if command.nil? #|| !@validator.validate(command)
+        return puts "Invalid Command" if command.nil?
         board.action command
       end
 

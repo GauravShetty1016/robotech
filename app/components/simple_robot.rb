@@ -18,15 +18,18 @@ module Robotech
 
       def action(command)
         action, parameters = command
-        return if (@position.nil? && action != "place")
+        is_valid_action = false
 
         @commands.each do |command_class|
           current_command = command_class.new(command: command, position: @position, orientations: @orientations, ruleset: @ruleset)
           if current_command.perform
             @position = current_command.position
+            is_valid_action = true
             break
           end
         end
+
+        return is_valid_action
       rescue ArgumentError => e
         # Do nothing
       end
