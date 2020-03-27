@@ -12,7 +12,6 @@ module Robotech
                                 Robotech::Commands::TurnCommand, Robotech::Commands::ReportCommand])
         @ruleset = ruleset
         @position = nil
-        @orientation_index = nil
         @commands = commands
         @orientations = orientations
       end

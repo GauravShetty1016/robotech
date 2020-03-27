@@ -5,25 +5,21 @@ RSpec.describe Robotech::Component::SimpleRobot do
   subject { Robotech::Component::SimpleRobot.new(ruleset: ruleset) }
 
   it "Should not take any action if the place command has not been processed" do
-    expect(subject).not_to receive(:place_robot)
-    expect(subject).not_to receive(:move_robot)
-    expect(subject.action(["move"])).to be_nil
+    subject.action(["move"])
+    expect { subject.action(["report"]) }.not_to output().to_stdout
 
-    expect(subject).not_to receive(:place_robot)
-    expect(subject).not_to receive(:turn_left)
-    expect(subject.action(["left"])).to be_nil
+    subject.action(["left"])
+    expect { subject.action(["report"]) }.not_to output().to_stdout
 
-    expect(subject).not_to receive(:place_robot)
-    expect(subject).not_to receive(:turn_right)
-    expect(subject.action(["right"])).to be_nil
+    subject.action(["right"])
+    expect { subject.action(["report"]) }.not_to output().to_stdout
 
-    expect(subject).not_to receive(:place_robot)
-    expect(subject).not_to receive(:print_position)
-    expect(subject.action(["report"])).to be_nil
+    subject.action(["report"])
+    expect { subject.action(["report"]) }.not_to output().to_stdout
   end
 
   it "Should place the robot if the place command has been sent" do
-    expect(subject).to receive(:place_robot).with(["0", "0", "north"]).and_call_original
+    # expect(subject).to receive(:place_robot).with(["0", "0", "north"]).and_call_original
     subject.action(["place", ["0", "0", "north"]])
     expect { subject.action(["report"]) }.to output("0,0,NORTH\n").to_stdout
   end

@@ -1,6 +1,5 @@
 require_relative "../../app/game_modes/file_input_mode"
 require_relative "../../app/parsers/text_file_parser"
-require_relative "../../app/validators/command_validator"
 
 RSpec.describe Robotech::GameMode::FileInputMode do
   let(:board) { double(action: nil) }
@@ -19,11 +18,6 @@ RSpec.describe Robotech::GameMode::FileInputMode do
     mode.start_game
   end
 
-  it "should call the validator for each command" do
-    expect(Robotech::Validator::CommandValidator).to receive(:validate).exactly(5).times.and_call_original
-    mode.start_game
-  end
-
   it "should create a new board_generator" do
     expect(board_gen).to receive(:new)
     Robotech::GameMode::FileInputMode.new(file: file_name, board_generator: board_gen)
@@ -34,8 +28,8 @@ RSpec.describe Robotech::GameMode::FileInputMode do
     Robotech::GameMode::FileInputMode.new(file: file_name, board_generator: board_gen)
   end
 
-  it "should call the board action method only for valid commands" do
-    expect(board).to receive(:action).exactly(4).times
+  it "should call the board action method for all commands" do
+    expect(board).to receive(:action).exactly(5).times
     mode.start_game
   end
 end

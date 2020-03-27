@@ -1,3 +1,5 @@
+require_relative "command"
+
 module Robotech
   module Commands
     class MoveCommand < Command
