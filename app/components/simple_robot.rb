@@ -2,14 +2,16 @@ require_relative "base_robot"
 require_relative "../commands/move_command"
 require_relative "../commands/place_command"
 require_relative "../commands/report_command"
-require_relative "../commands/turn_command"
+require_relative "../commands/turn_left_command"
+require_relative "../commands/turn_right_command"
 
 module Robotech
   module Component
     class SimpleRobot < BaseRobot
       def initialize(ruleset:, orientations: ["north", "east", "south", "west"],
                      commands: [Robotech::Commands::MoveCommand, Robotech::Commands::PlaceCommand,
-                                Robotech::Commands::TurnCommand, Robotech::Commands::ReportCommand])
+                                Robotech::Commands::TurnLeftCommand, Robotech::Commands::TurnRightCommand,
+                                Robotech::Commands::ReportCommand])
         @ruleset = ruleset
         @position = nil
         @commands = commands
