@@ -4,7 +4,7 @@ module Robotech
   module Commands
     class ReportCommand < Command
       def perform
-        return false if @action != valid_action || @position.nil?
+        return false unless is_valid_command?
 
         puts "#{@position[:x]},#{@position[:y]},#{@orientations[@position[:facing_index]].upcase}"
         @position
@@ -12,6 +12,12 @@ module Robotech
 
       def valid_action
         @valid_action || "report"
+      end
+
+      private
+
+      def is_valid_command?
+        @action == valid_action && !@position.nil? && !@orientations.nil? && !@position[:facing_index].nil? && !@orientations[@position[:facing_index]].nil?
       end
     end
   end

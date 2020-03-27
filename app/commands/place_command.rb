@@ -4,8 +4,7 @@ module Robotech
   module Commands
     class PlaceCommand < Command
       def perform
-        return false unless is_valid_command?
-        return unless @ruleset.valid_position?({ x: @params[0].to_i, y: @params[1].to_i })
+        return false unless is_valid_command? && @ruleset.valid_position?({ x: @params[0].to_i, y: @params[1].to_i })
 
         @position = { x: @params[0].to_i, y: @params[1].to_i, facing_index: @orientations.index(@params[2]) }
         @position
@@ -18,7 +17,7 @@ module Robotech
       private
 
       def is_valid_command?
-        return false if @action != valid_action || @params.nil? || @params.length == 0
+        return false if @action != valid_action || @params.nil? || @params.length != 3
 
         x, y, facing = @params
 
