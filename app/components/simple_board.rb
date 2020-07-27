@@ -9,7 +9,7 @@ module Robotech
         @options = options
         @width = @options[:width] || 5
         @height = @options[:height] || 5
-        @ruleset = ruleset.new(boundaries: { width: @width, height: @height })
+        @ruleset = ruleset.new(boundaries: { width: @width, height: @height }, options: options)
         @robot = robot.new(ruleset: @ruleset)
       end
     end

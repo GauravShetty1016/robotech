@@ -14,9 +14,13 @@ module Robotech
         parser.on("-i", "--interactive", "Interactive mode") do |v|
           options[:interactive] = v
         end
+
+        parser.on("-o", "-obstacle_list FILE NAME", "File listing the position of obstacles on the board") do |v|
+          options[:obstacle_file] = v
+        end
       end.parse!
 
-      options[:interactive] = true if options.empty?
+      options[:interactive] = true if options.empty? || options[:file].nil?
       CLI.new(options).play
     end
 
@@ -26,9 +30,9 @@ module Robotech
 
     def play
       if !@options[:file].nil?
-        mode = GameMode::FileInputMode.new(file: @options[:file])
+        mode = GameMode::FileInputMode.new(file: @options[:file], options: { obstacle_file: @options[:obstacle_file] })
       elsif @options[:interactive]
-        mode = GameMode::InteractiveMode.new
+        mode = GameMode::InteractiveMode.new(options: { obstacle_file: @options[:obstacle_file] })
       end
 
       mode.start_game if mode

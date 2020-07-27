@@ -1,17 +1,19 @@
 require_relative "../parsers/text_file_parser"
 require_relative "../board_generators/simple_board_generator"
 require_relative "../parsers/simple_command_parser"
+require_relative "../parsers/obstacle_file_parser"
 
 module Robotech
   module GameMode
     class FileInputMode
       def initialize(file:, parser: Robotech::Parser::TextFileParser, board_generator: Robotech::BoardGenerator::SimpleBoardGenerator,
-                     command_parser: Robotech::Parser::SimpleCommandParser, options: {})
+                     command_parser: Robotech::Parser::SimpleCommandParser, obstacle_parser: Robotech::Parser::ObstacleFileParser, options: {})
         @file = file
         @options = options
         @parser = parser
+        @obstacles = obstacle_parser.parse(file: options[:obstacle_file]) if options[:obstacle_file]
         @board_generator = board_generator
-        @board = @board_generator.new.board
+        @board = @board_generator.new(options: { obstacles: @obstacles }).board
         @command_parser = command_parser
       end
 

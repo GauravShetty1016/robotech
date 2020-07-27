@@ -8,7 +8,7 @@ module Robotech
       end
 
       def board
-        @board.new(robot: @robot)
+        @board.new(robot: @robot, options: @options)
       end
     end
   end
