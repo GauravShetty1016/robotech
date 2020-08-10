@@ -10,6 +10,7 @@ There are 2 modes to the game. A file mode and an interactive mode. To get start
 4. In file mode all the commands in the provided file are run at once and the output is printed to console.
 5. To run the program in interactive mode: `./bin/robotech -i` or just `./bin/robotech`
 6. In interactive mode you are provided with a command prompt. You can enter the commands one at a time. Type `exit` to exit or just press `ctrl+c`.
+7. In each mode you can also use the -o option to provide a list of obstacles. A sample file has been attached so you can run `./bin/robotech -o obstacles.txt`
 
 ## Structure
 

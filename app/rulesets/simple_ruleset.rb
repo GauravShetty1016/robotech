@@ -19,7 +19,7 @@ module Robotech
         blocked = false
         @obstacles.each do |ob|
           blocked = true if ob[:x] == position[:x] && ob[:y] == position[:y]
-        end
+        end if @obstacles
         blocked
       end
     end
